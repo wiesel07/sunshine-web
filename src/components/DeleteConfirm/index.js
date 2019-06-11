@@ -3,16 +3,18 @@ import { Popconfirm } from 'antd';
 
 class DeleteConfirm extends React.Component {
     render() {
-        const { method, params, dispatch } = this.props;
+        const { method, params, dispatch,callback } = this.props;
 
         return (
             <Fragment>
                 <Popconfirm
                     title="确定删除？"
                     onConfirm={(e) => {
+                        debugger
                         dispatch({
                             type: method,
-                            payload: { params }
+                            payload: { params },
+                            callback:callback
                         });
                     }}
                     okText="确认"

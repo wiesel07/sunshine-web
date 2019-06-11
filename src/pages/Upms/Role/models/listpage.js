@@ -1,4 +1,4 @@
-import { queryPage } from '@/services/upmsRole';
+import { queryPage,remove } from '@/services/upmsRole';
 export default {
     namespace: 'Upms.Role',
 
@@ -39,9 +39,15 @@ export default {
         //     });
         //     if (callback) callback();
         //   },
-        *remove({ payload }, { call, put }) {
-            console.log("数据"+payload);
-        },
+        *remove({ payload, callback }, { call, put }) {
+            debugger
+            const response = yield call(remove, payload);
+            yield put({
+              type: 'save',
+              payload: response,
+            });
+            if (callback) callback();
+          },
     },
 
     reducers: {

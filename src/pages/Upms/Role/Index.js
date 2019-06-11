@@ -8,14 +8,14 @@ import DeleteConfirm from '@/components/DeleteConfirm';
 
 const FormItem = Form.Item;
 const { Option } = Select;
-const roleModelName='Upms.Role';
+const roleModelName = 'Upms.Role';
 import styles from './UpmsRole.less';
 
 @connect((state) => {
-  
+
     return {
-        gridData:state['Upms.Role'].gridData,
-        loading: state.loading.models
+        gridData: state['Upms.Role'].gridData,
+        loading: state.loading.effects.fetch
     }
 }
 )
@@ -43,14 +43,19 @@ class UpmsRole extends React.Component {
             render: (text, record) => (
                 <DeleteConfirm
                     method={`${roleModelName}/remove`}
-                    params={{'id':record.roleId}}
+                    params={{ 'id': record.roleId }}
                     dispatch={this.props.dispatch}
+                    callback={this.refreshTable}
                 />
             ),
         },
     ];
 
     componentWillMount() {
+      this.refreshTable();
+    }
+
+    refreshTable = () => {
         const { dispatch } = this.props;
         dispatch({
             type: `${roleModelName}/fetch`,
@@ -59,7 +64,8 @@ class UpmsRole extends React.Component {
                 pageSize: '10'
             }
         });
-    }
+    };
+
     handleSelectRows = rows => {
         this.setState({
             selectedRows: rows,
@@ -120,13 +126,13 @@ class UpmsRole extends React.Component {
 
     render() {
         const {
-            gridData ,
+            gridData,
             loading,
         } = this.props;
 
         //将数据拼接成StandardTable组件需要的格式
         let data = [];
-   
+
         data.list = gridData.rows;
 
         data.pagination = {
