@@ -163,13 +163,17 @@ class BasicLayout extends React.Component {
   }
 }
 
-export default connect(({ global, setting, menu: menuModel }) => ({
-  collapsed: global.collapsed,
-  layout: setting.layout,
-  menuData: menuModel.menuData,
-  breadcrumbNameMap: menuModel.breadcrumbNameMap,
-  ...setting,
-}))(props => (
+export default connect(
+  ({ global, setting, menu: menuModel }) => (
+    {
+      collapsed: global.collapsed,
+      layout: setting.layout,
+      menuData: menuModel.menuData,
+      breadcrumbNameMap: menuModel.breadcrumbNameMap,
+      ...setting,
+    }
+  )
+)(props => (
   <Media query="(max-width: 599px)">
     {isMobile => <BasicLayout {...props} isMobile={isMobile} />}
   </Media>
