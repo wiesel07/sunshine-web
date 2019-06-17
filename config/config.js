@@ -29,20 +29,20 @@ const plugins = [
       },
       pwa: pwa
         ? {
-            workboxPluginMode: 'InjectManifest',
-            workboxOptions: {
-              importWorkboxFrom: 'local',
-            },
-          }
+          workboxPluginMode: 'InjectManifest',
+          workboxOptions: {
+            importWorkboxFrom: 'local',
+          },
+        }
         : false,
       ...(!TEST && os.platform() === 'darwin'
         ? {
-            dll: {
-              include: ['dva', 'dva/router', 'dva/saga', 'dva/fetch'],
-              exclude: ['@babel/runtime', 'netlify-lambda'],
-            },
-            hardSource: false,
-          }
+          dll: {
+            include: ['dva', 'dva/router', 'dva/saga', 'dva/fetch'],
+            exclude: ['@babel/runtime', 'netlify-lambda'],
+          },
+          hardSource: false,
+        }
         : {}),
     },
   ],
@@ -80,10 +80,11 @@ export default {
   },
   proxy: {
     '/smart-web/': {
-     // target: 'https://preview.pro.ant.design/',
-     target: 'http://172.18.160.109:8087/',//吴建
+      // target: 'https://preview.pro.ant.design/',
+      // target: 'http://172.18.160.109:8087/',//吴建
+      target: 'http://172.18.166.195:8087/',
       changeOrigin: true,
-     // pathRewrite: { '^/server': '' },
+      // pathRewrite: { '^/server': '' },
     },
   },
   ignoreMomentLocale: true,

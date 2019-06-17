@@ -290,7 +290,7 @@ export default [
         ],
       },
 
-      // operation
+      //     operation
       {
         path: '/upms',
         icon: 'table',
@@ -303,7 +303,7 @@ export default [
           },
         ]
       },
-      
+
 
       {
         component: '404',

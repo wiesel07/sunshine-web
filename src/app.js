@@ -1,6 +1,7 @@
 export const dva = {
   config: {
     onError(err) {
+      console.log(err);
       err.preventDefault();
     },
   },
@@ -9,3 +10,5 @@ export const dva = {
 export function render(oldRender) {
   oldRender();
 }
+
+

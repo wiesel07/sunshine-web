@@ -52,7 +52,6 @@ export default {
 
     reducers: {
         save(state, action) {
-            debugger;
             return {
                 ...state,
                 gridData: action.payload.data,

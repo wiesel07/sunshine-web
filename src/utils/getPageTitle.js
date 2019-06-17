@@ -10,18 +10,20 @@ export const matchParamsPath = (pathname, breadcrumbNameMap) => {
 };
 
 const getPageTitle = (pathname, breadcrumbNameMap) => {
-  const currRouterData = matchParamsPath(pathname, breadcrumbNameMap);
-  if (!currRouterData) {
-    return title;
-  }
-  const pageName = menu.disableLocal
-    ? currRouterData.name
-    : formatMessage({
-        id: currRouterData.locale || currRouterData.name,
-        defaultMessage: currRouterData.name,
-      });
+  // const currRouterData = matchParamsPath(pathname, breadcrumbNameMap);
+  // if (!currRouterData) {
+  //   return title;
+  // }
+  // const pageName = menu.disableLocal
+  //   ? currRouterData.name
+  //   : formatMessage({
+  //       id: currRouterData.locale || currRouterData.name,
+  //       defaultMessage: currRouterData.name,
+  //     });
 
-  return `${pageName} - ${title}`;
+  // return `${pageName} - ${title}`;
+
+  return '测试动态菜单';
 };
 
 export default memoizeOne(getPageTitle, isEqual);
