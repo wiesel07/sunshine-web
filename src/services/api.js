@@ -125,8 +125,4 @@ export async function getFakeCaptcha(mobile) {
   return request(`/api/captcha?mobile=${mobile}`);
 }
 
-// 获取mock的菜单数据
-export async function getMockMenuData() {
-  const result= request('/getMockMenuData');
-  return result;
-}
+

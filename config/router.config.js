@@ -303,7 +303,18 @@ export default [
           },
         ]
       },
-
+      {
+        path: '/system',
+        icon: 'table',
+        name: 'system',
+        routes: [
+          {
+            path: '/system/dict',
+            name: 'dict',
+            component: './System/Dict/Index',
+          },
+        ]
+      },
 
       {
         component: '404',

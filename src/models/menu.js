@@ -4,6 +4,7 @@ import { formatMessage } from 'umi-plugin-react/locale';
 import Authorized from '@/utils/Authorized';
 import { menu } from '../defaultSettings';
 import { getMockMenuData } from '@/services/api';
+import { getMenuTree } from '@/services/menu';
 
 const { check } = Authorized;
 
@@ -170,8 +171,9 @@ export default {
     *getMenuData({ payload }, { call, put }) {
     
       const { routes, authority, path } = payload;
-      let menuData = yield call(getMockMenuData);
-      menuData = formatterMenu(menuData);
+     // let menuData = yield call(getMockMenuData);
+      let menuData = yield call(getMenuTree);
+      menuData = formatterMenu(menuData.data);
 
     //  const originalMenuData = memoizeOneFormatter(routes, authority, path);
       const breadcrumbNameMap = memoizeOneGetBreadcrumbNameMap(menuData);

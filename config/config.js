@@ -79,10 +79,11 @@ export default {
     'primary-color': primaryColor,
   },
   proxy: {
-    '/smart-web/': {
+    '/sunshine/': {
       // target: 'https://preview.pro.ant.design/',
       // target: 'http://172.18.160.109:8087/',//吴建
-      target: 'http://172.18.166.195:8087/',
+     // target: 'http://172.18.166.195:8087/',
+     target: 'http://172.18.160.109:8087/',
       changeOrigin: true,
       // pathRewrite: { '^/server': '' },
     },
