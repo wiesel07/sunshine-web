@@ -103,7 +103,7 @@ const memoizeOneGetBreadcrumbNameMap = memoizeOne(getBreadcrumbNameMap, isEqual)
 //每次格式化菜单的时候，都顺便设置一下菜单编码
 let authArray = [];
 // 格式化后台返回的菜单数据
-function formatterMenu(data) {
+function formatterMenu(data, parentIds = []) {
   if (!data) {
     return undefined;
   }
@@ -116,6 +116,8 @@ function formatterMenu(data) {
     if (menuType === '2') {
        authArray.push(menuCode);
     }
+    let menuCodes = [...parentIds]; // 当前展开的菜单 selectKey
+    menuCodes.push(menuCode);
     if (children && children.length) {
       newItem = {
         name,
@@ -123,7 +125,8 @@ function formatterMenu(data) {
         icon: menuIcon,
         menuType,
         menuCode,
-        children: formatterMenu(children)
+        menuCodes,
+        children: formatterMenu(children,menuCodes)
       }
 
     } else {
@@ -133,6 +136,7 @@ function formatterMenu(data) {
           path: menuUrl,
           icon: menuIcon,
           menuType,
+          menuCodes,
           menuCode,
         }
       }
@@ -155,33 +159,33 @@ export default {
   },
 
   effects: {
-    // *getMenuData({ payload }, { put }) {
-    //   const { routes, authority, path } = payload;
-    //   const originalMenuData = memoizeOneFormatter(routes, authority, path);
-    //   const menuData = filterMenuData(originalMenuData);
-    //   console.log(menuData[0])
-    //   const breadcrumbNameMap = memoizeOneGetBreadcrumbNameMap(originalMenuData);
-    //   yield put({
-    //     type: 'save',
-    //     payload: { menuData, breadcrumbNameMap, routerData: routes },
-    //   });
-    // },
-
-
-    *getMenuData({ payload }, { call, put }) {
-    
+    *getMenuData({ payload }, { put }) {
       const { routes, authority, path } = payload;
-     // let menuData = yield call(getMockMenuData);
-      let menuData = yield call(getMenuTree);
-      menuData = formatterMenu(menuData.data);
-
-    //  const originalMenuData = memoizeOneFormatter(routes, authority, path);
-      const breadcrumbNameMap = memoizeOneGetBreadcrumbNameMap(menuData);
+      const originalMenuData = memoizeOneFormatter(routes, authority, path);
+      const menuData = filterMenuData(originalMenuData);
+      console.log(menuData[0])
+      const breadcrumbNameMap = memoizeOneGetBreadcrumbNameMap(originalMenuData);
       yield put({
         type: 'save',
         payload: { menuData, breadcrumbNameMap, routerData: routes },
       });
     },
+
+
+    // *getMenuData({ payload }, { call, put }) {  
+
+    //   const { routes, authority, path } = payload;
+    //  // let menuData = yield call(getMockMenuData);
+    //   let menuData = yield call(getMenuTree);
+    //   menuData = formatterMenu(menuData.data);
+
+    //   const originalMenuData = memoizeOneFormatter(routes, authority, path);
+    //   const breadcrumbNameMap = memoizeOneGetBreadcrumbNameMap(menuData);
+    //   yield put({
+    //     type: 'save',
+    //     payload: { menuData, breadcrumbNameMap, routerData: routes },
+    //   });
+    // },
 
   },
 

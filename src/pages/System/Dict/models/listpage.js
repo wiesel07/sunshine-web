@@ -1,4 +1,4 @@
-import { queryPage,remove } from '@/services/systemDict';
+import { queryDictPage, removeDict,addDict,updateDict } from '@/services/systemApi';
 export default {
     namespace: 'System.Dict',
 
@@ -9,30 +9,30 @@ export default {
 
     effects: {
         *fetch({ payload }, { call, put }) {
-            const response = yield call(queryPage, payload);
-            const data =  response.data;
+            const response = yield call(queryDictPage, payload);
+            const data = response.data;
             const result = {
-                list: data.rows||[],
+                list: data.rows || [],
                 pagination: {
-                  total: data.total,
-                  pageSize:data.size,
-                  current: data.current
+                    total: parseInt(data.total),
+                    pageSize: parseInt(data.size),
+                    current: parseInt(data.current)
                 },
-              };
+            };
 
             yield put({
                 type: 'save',
                 payload: result,
             });
         },
-        //   *add({ payload, callback }, { call, put }) {
-        //     const response = yield call(addRule, payload);
-        //     yield put({
-        //       type: 'save',
-        //       payload: response,
-        //     });
-        //     if (callback) callback();
-        //   },
+        *add({ payload, callback }, { call, put }) {
+            const response = yield call(addDict, payload);
+            yield put({
+                type: 'save',
+                payload:response,
+            });
+            if (callback) callback();
+        },
         //   *remove({ payload, callback }, { call, put }) {
         //     const response = yield call(removeRule, payload);
         //     yield put({
@@ -51,13 +51,13 @@ export default {
         //   },
         *remove({ payload, callback }, { call, put }) {
             debugger
-            const response = yield call(remove, payload);
+            const response = yield call(removeDict, payload);
             yield put({
-              type: 'save',
-              payload: response,
+                type: 'save',
+                payload: response,
             });
             if (callback) callback();
-          },
+        },
     },
 
     reducers: {

@@ -291,18 +291,18 @@ export default [
       },
 
       //     operation
-      {
-        path: '/upms',
-        icon: 'table',
-        name: 'upms',
-        routes: [
-          {
-            path: '/upms/role',
-            name: 'role',
-            component: './Upms/Role/Index',
-          },
-        ]
-      },
+      // {
+      //   path: '/upms',
+      //   icon: 'table',
+      //   name: 'upms',
+      //   routes: [
+      //     {
+      //       path: '/upms/role',
+      //       name: 'role',
+      //       component: './Upms/Role/Index',
+      //     },
+      //   ]
+      // },
       {
         path: '/system',
         icon: 'table',
@@ -312,6 +312,11 @@ export default [
             path: '/system/dict',
             name: 'dict',
             component: './System/Dict/Index',
+          },
+          {
+            path: '/system/role',
+            name: 'role',
+            component: './System/Role/Index',
           },
         ]
       },

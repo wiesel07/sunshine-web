@@ -42,6 +42,7 @@ export default {
   'menu.editor.flow': '流程编辑器',
   'menu.editor.mind': '脑图编辑器',
   'menu.editor.koni': '拓扑编辑器',
-  'menu.upms':'系统管理',
-  'menu.upms.role':'角色管理'
+  'menu.system':'系统管理',
+  'menu.system.role':'角色管理',
+  'menu.system.dict':'字典管理',
 };

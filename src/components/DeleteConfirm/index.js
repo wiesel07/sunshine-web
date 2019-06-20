@@ -13,7 +13,7 @@ class DeleteConfirm extends React.Component {
                         debugger
                         dispatch({
                             type: method,
-                            payload: { params },
+                            payload: { ...params },
                             callback:callback
                         });
                     }}

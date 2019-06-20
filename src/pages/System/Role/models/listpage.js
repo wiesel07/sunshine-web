@@ -1,6 +1,6 @@
 import { queryPage,remove } from '@/services/upmsRole';
 export default {
-    namespace: 'Upms.Role',
+    namespace: 'System.Role',
 
     state: {
         gridData: [],

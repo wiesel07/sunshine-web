@@ -8,13 +8,13 @@ import DeleteConfirm from '@/components/DeleteConfirm';
 
 const FormItem = Form.Item;
 const { Option } = Select;
-const roleModelName = 'Upms.Role';
-import styles from './UpmsRole.less';
+const roleModelName = 'System.Role';
+import styles from './Role.less';
 
 @connect((state) => {
 
     return {
-        gridData: state['Upms.Role'].gridData,
+        gridData: state['System.Role'].gridData,
         loading: state.loading.effects.fetch
     }
 }
